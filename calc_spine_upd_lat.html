@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MS Limets</title>
+  </head>
+  <body>
+    <h1>MS Līmets. Bez šūšanas. </h1>
+    <form>
+      <label for="page-count">Lpp skaits:</label>
+      <input type="number" id="page-count" name="page-count"><br>
+
+      <label for="paper-thickness">Bloka papīrs, biezums mm :</label>
+      <input type="number" id="paper-thickness" name="paper-thickness"><br>
+
+      <label for="cover-thickness">Vāka papīrs, biezums mm:</label>
+      <input type="number" id="cover-thickness" name="cover-thickness"><br>
+
+      <button type="button" onclick="calculateSpineThickness()">Apreķināt muguriņu</button><br>
+
+      <label for="spine-thickness">Muguriņas biezums:</label>
+      <output id="spine-thickness" name="spine-thickness"></output> mm
+    </form>
+
+    <script>
+      function calculateSpineThickness() {
+        var pageCount = parseInt(document.getElementById("page-count").value);
+        var paperThickness = parseFloat(document.getElementById("paper-thickness").value);
+        var coverThickness = parseFloat(document.getElementById("cover-thickness").value);
+
+        var blockThickness = pageCount / 2 * paperThickness;
+        var coefficient = blockThickness > 5 ? 0.8 : 0.6;
+        var spineThickness = blockThickness + coverThickness * 2 + coefficient;
+
+        document.getElementById("spine-thickness").value = spineThickness.toFixed(1);
+      }
+    </script>
+  </body>
+</html>
